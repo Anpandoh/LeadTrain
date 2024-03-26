@@ -29,12 +29,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third party apps
-    "chatterbot.ext.django_chatterbot",
+    # "chatterbot.ext.django_chatterbot",
     "tailwind",
     "django_browser_reload",
     # Local apps
-    "chat",
     "theme",
+    "chat",  
 ]
 
 MIDDLEWARE = [
@@ -124,9 +124,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Celery
-CELERY_BROKER_URL = config("CELERY_BROKER_URL")
-CELERY_RESULT_BACKEND = config("REDIS_BACKEND")
 
 # Redis Cache
 CACHES = {
@@ -146,13 +143,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Chatterbot
-CHATTERBOT = {
-    "name": "User Support Bot",
-    "logic_adapters": [
-        "chatterbot.logic.BestMatch",
-    ],
-}
+
 
 # Tailwind
 TAILWIND_APP_NAME = "theme"
