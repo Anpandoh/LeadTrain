@@ -13,11 +13,11 @@
   </div>
   {% comment %} HR {% endcomment %}
   <div id="gitem2" class="grid-item bg-green-500 flex flex-col justify-center items-center">
-    <h1 class="relative center text-3xl tracking-tight font-medium text-white" id="chat-header">Human Resources</h1>
-    <div id="chat-log-HR" class="relative center mt-4 w-full p-6 overflow-y-auto h-[30rem] bg-gray-50 border border-gray-200"></div>
+    <h1 class="relative center text-3xl tracking-tight font-medium text-white" id="HRchat-header">Human Resources</h1>
+    <div id="HRchat-log" class="relative center mt-4 w-full p-6 overflow-y-auto h-[30rem] bg-gray-50 border border-gray-200"></div>
     <div class="mt-4 flex flex-col items-center py-5">
-      <input id="chat-message-input-HR" class="py-2 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-blue-500 mb-2" type="text" placeholder="Type Message." />
-      <button id="chat-message-submit-HR" class="relative py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 w-full max-w-[10rem]" type="submit">Send</button>
+      <input id="HRchat-message-input" class="py-2 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-blue-500 mb-2" type="text" placeholder="Type Message." />
+      <button id="HRchat-message-submit" class="relative py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 w-full max-w-[10rem]" type="submit">Send</button>
     </div>
   </div>
 
@@ -42,4 +42,5 @@
 {% block scripts%}
 {% load static %}
 <script src="{% static 'chatScripts/SWEscript.js' %}"> </script>
+<script src="{% static 'chatScripts/HRscript.js' %}"> </script>
 {% endblock %}
