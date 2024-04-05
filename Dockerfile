@@ -10,13 +10,15 @@ COPY ./requirements.txt .
 
 RUN apt-get update
 RUN apt install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - 
+RUN curl -sL https://deb.nodesource.com/setup_current.x | bash - 
 
 RUN apt-get update -y && \
     apt-get install -y netcat && \
     apt-get install -y nodejs && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
+
+RUN npm install -g npm@10.5.1 
 
 
 COPY ./entrypoint.sh .

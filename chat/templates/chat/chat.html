@@ -1,38 +1,36 @@
 {% extends 'base.html' %} 
 {% block body %}
 
+
 <div class="grid grid-cols-3 grid-rows-2 h-screen w-screen gap-1">
   {% comment %} SWE {% endcomment %}
   <div id="gitem1" class="grid-item bg-red-500 flex flex-col justify-center items-center">
     <h1 class="relative center text-3xl tracking-tight font-medium text-white" id="chat-header">Software Engineer</h1>
     <div id="chat-log" class="relative center mt-4 w-full p-6 overflow-y-auto h-[30rem] bg-gray-50 border border-gray-200"></div>
-    <div class="mt-4 flex flex-col items-center py-5">
+    <div class="mt-4 flex flex-col items-center">
       <input id="chat-message-input" class="py-2 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-blue-500 mb-2" type="text" placeholder="Type Message." />
       <button id="chat-message-submit" class="relative py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 w-full max-w-[10rem]" type="submit">Send</button>
     </div>
   </div>
+  <div class="resizer bg-red-500 opacity-50 z-10 w-1 cursor-ew-resize absolute" data-resize-target="gitem1"></div>
   {% comment %} HR {% endcomment %}
   <div id="gitem2" class="grid-item bg-green-500 flex flex-col justify-center items-center">
     <h1 class="relative center text-3xl tracking-tight font-medium text-white" id="HRchat-header">Human Resources</h1>
     <div id="HRchat-log" class="relative center mt-4 w-full p-6 overflow-y-auto h-[30rem] bg-gray-50 border border-gray-200"></div>
-    <div class="mt-4 flex flex-col items-center py-5">
+    <div class="mt-4 flex flex-col items-center">
       <input id="HRchat-message-input" class="py-2 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:border-blue-500 mb-2" type="text" placeholder="Type Message." />
       <button id="HRchat-message-submit" class="relative py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900 w-full max-w-[10rem]" type="submit">Send</button>
     </div>
   </div>
-
-  <div class="grid-item bg-blue-500 flex justify-center items-center">
-
-  </div>
-  <div class="grid-item bg-yellow-500 flex justify-center items-center">
-
-  </div>
-  <div class="grid-item bg-fuchsia-500 flex justify-center items-center">
-
-  </div>
-  <div class="grid-item bg-cyan-500 flex justify-center items-center">
-
-  </div>
+  {% comment %} Supervisor {% endcomment %}
+  <div class="resizer bg-red-500 opacity-50 z-10 w-1 cursor-ew-resize absolute" data-resize-target="gitem2"></div>
+  <div class="grid-item bg-blue-500 flex justify-center items-center"> </div>
+  <div class="resizer bg-red-500 opacity-50 z-10 w-1 cursor-ew-resize absolute" data-resize-target="gitem3"></div>
+  <div class="grid-item bg-yellow-500 flex justify-center items-center"> </div>
+  <div class="resizer bg-red-500 opacity-50 z-10 w-1 cursor-ew-resize absolute" data-resize-target="gitem4"></div>
+  <div class="grid-item bg-fuchsia-500 flex justify-center items-center"></div>
+  <div class="resizer bg-red-500 opacity-50 z-10 w-1 cursor-ew-resize absolute" data-resize-target="gitem5"></div>
+  <div class="grid-item bg-cyan-500 flex justify-center items-center"> </div>
 </div>
 
 {% endblock %} 
@@ -41,6 +39,23 @@
 
 {% block scripts%}
 {% load static %}
-<script src="{% static 'chatScripts/SWEscript.js' %}"> </script>
-<script src="{% static 'chatScripts/HRscript.js' %}"> </script>
+  <script>
+    document.querySelectorAll('.resizer').forEach(resizer => {
+      resizer.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        let startX = e.pageX;
+        let startWidth = resizer.previousElementSibling.offsetWidth;
+        function mouseMoveHandler(e) {
+          const dx = e.pageX - startX;
+          resizer.previousElementSibling.style.width = `${startWidth + dx}px`;
+        }
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', () => {
+          document.removeEventListener('mousemove', mouseMoveHandler);
+        }, { once: true });
+      });
+    });
+  </script>
+  <script src="{% static 'chatScripts/SWEscript.js' %}"> </script>
+  <script src="{% static 'chatScripts/HRscript.js' %}"> </script>
 {% endblock %}
