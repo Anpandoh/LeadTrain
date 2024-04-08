@@ -137,7 +137,7 @@ CACHES = {
 # Django Channels
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
         "CONFIG": {
             "hosts": [config("REDIS_BACKEND")],
         },
@@ -148,3 +148,7 @@ CHANNEL_LAYERS = {
 
 # Tailwind
 TAILWIND_APP_NAME = "theme"
+
+# Celery
+CELERY_BROKER_URL = config("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = config("REDIS_BACKEND")

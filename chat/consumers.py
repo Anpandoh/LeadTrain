@@ -9,7 +9,8 @@ from .tasks import get_response
 class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        get_response(self.channel_name, text_data_json)
+        # print(text_data_json)
+        get_response.delay(self.channel_name, text_data_json)
 
         async_to_sync(self.channel_layer.send)(
             self.channel_name,
@@ -23,19 +24,39 @@ class ChatConsumer(WebsocketConsumer):
         text = event["text"]
         self.send(text_data=json.dumps({"text": text}))
 
-# class HRChatConsumer(WebsocketConsumer):
-#     def receive(self, text_data):
-#         text_data_json = json.loads(text_data)
-#         get_response(self.channel_name, text_data_json)
+class HRChatConsumer(WebsocketConsumer):
+    def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        # print(text_data_json)
+        get_response.delay(self.channel_name, text_data_json)
 
-#         async_to_sync(self.channel_layer.send)(
-#             self.channel_name,
-#             {
-#                 "type": "chat_message",
-#                 "text": {"msg": text_data_json["text"], "source": "user"},
-#             },
-#         )
+        async_to_sync(self.channel_layer.send)(
+            self.channel_name,
+            {
+                "type": "chat_message",
+                "text": {"msg": text_data_json["text"], "source": "user"},
+            },
+        )
 
-#     def chat_message(self, event):
-#         text = event["text"]
-#         self.send(text_data=json.dumps({"text": text}))
+    def chat_message(self, event):
+        text = event["text"]
+        self.send(text_data=json.dumps({"text": text}))
+
+
+class CEOChatConsumer(WebsocketConsumer):
+    def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        # print(text_data_json)
+        get_response.delay(self.channel_name, text_data_json)
+
+        async_to_sync(self.channel_layer.send)(
+            self.channel_name,
+            {
+                "type": "chat_message",
+                "text": {"msg": text_data_json["text"], "source": "user"},
+            },
+        )
+
+    def chat_message(self, event):
+        text = event["text"]
+        self.send(text_data=json.dumps({"text": text}))

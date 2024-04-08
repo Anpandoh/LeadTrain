@@ -25,6 +25,18 @@ services:
   
   redis:
     image: redis:7
+
+  celery:
+    build: .
+    command: celery -A config worker -l info
+    volumes:
+      - .:/code
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+      - redis
+      - web
   
 
 volumes:

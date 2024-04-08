@@ -38,7 +38,12 @@ var wss_protocol = window.location.protocol == "https:" ? "wss://" : "ws://";
           <span className="block font-normal">${msg.msg}</span></div></li>`;
       });
       str += "</ul>";
-      document.querySelector("#chat-log").innerHTML = str;
+      // Select the chat log div and update its content
+    var chatLogDiv = document.querySelector("#chat-log");
+    chatLogDiv.innerHTML = str;
+
+    // Scroll to the bottom of the chat log
+    chatLogDiv.scrollTop = chatLogDiv.scrollHeight;
   };
   
   chatSocket.onclose = function (e) {
@@ -56,6 +61,9 @@ var wss_protocol = window.location.protocol == "https:" ? "wss://" : "ws://";
   document.querySelector("#chat-message-submit").onclick = function (e) {
       var messageInputDom = document.querySelector("#chat-message-input");
       var message = messageInputDom.value;
+      if (message.trim() == "") {
+        return;
+        }
       chatSocket.send(
       JSON.stringify({
           text: message,
